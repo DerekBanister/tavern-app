@@ -13,6 +13,8 @@ const newnew = result.toISOString().slice(0, 10);
 
 
 
+
+
 async function getMemberList() {
     //the polar badlands prefix to the temple api url is a cors bypass.
     const response = await fetch(`https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/group_info.php?id=1061`, {
@@ -39,9 +41,11 @@ async function getSinglePlayer() {
     ccList.then(async function (list) {
         // list.length, for now using 5 so I dont hit 429's
         //looping through member array to get a specific member, then put their username in another api call to retreive player specific data
+        for (let i = 0; i < list.length; i++) {
 
+            //sleep for js
+            await new Promise(r => setTimeout(r, 500));
 
-        for (let i = 0; i < 5; i++) {
             let singleMember = list[i];
 
             //api call for single members from member list
@@ -59,7 +63,7 @@ async function getSinglePlayer() {
             //this var is a single cc members data
             let ccMembers = await response.json();
             //parsing out data
-
+            // console.log(ccMembers);
             let individual = ccMembers.data;
 
             //individual username
@@ -68,7 +72,7 @@ async function getSinglePlayer() {
 
             //all this is to make date format clean
             //last time the user was checked at templeosrs
-            let lastChecked = individual["Last checked"];
+            let lastChecked = individual["Last changed"];
             //cutting off useless timestamp on lastChecked
             let formatted = lastChecked.split(" ")[0];
             //Split date on the -  (2022-05-27 will be 2022 at index 0, 05 at index 2, etc..)
@@ -80,10 +84,16 @@ async function getSinglePlayer() {
             let lastActive = newStr[1] + '-' + newStr[2] + '-' + newStr[0];
 
 
-            console.log(duck4);
-            console.log(lastActive);
+            let duck5 = duck4.split("-");
+            let duck6 = duck5[0] // (5)
+
+            let lastMonth = lastActive.split("-");
+            let lastMonth2 = lastMonth[0]; // (4)
+
+            console.log(username + " " + duck6 + " ||| " + lastMonth2);
+
             // logic gate(if statement) to decide whether or not dates are appended, in order
-            if (lastActive > duck4) {
+            if (parseInt(lastMonth2) <= parseInt(duck6)) {
                 //creating a element for each data point
                 let li1 = document.createElement("li");
 
@@ -93,10 +103,10 @@ async function getSinglePlayer() {
                 //append both to page
                 listEl.appendChild(li1);
             }
+
         }
 
     })
 }
-
 
 getSinglePlayer();
