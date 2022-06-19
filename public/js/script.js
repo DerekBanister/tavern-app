@@ -48,7 +48,7 @@ async function getSinglePlayer() {
             //parsing out data
             // console.log(ccMembers);
             let individual = ccMembers.data;
-
+            console.log(individual);
             //individual username
             let username = individual.Username;
 
@@ -69,20 +69,11 @@ async function getSinglePlayer() {
             let newStr = formatted.split("-");
             //reverse date format
             let lastActive = newStr[1] + '-' + newStr[2] + '-' + newStr[0];
-            // console.log(lastActive);
 
-            // console.log(username + " " + duck6 + " ||| " + lastMonth2);
-
-            // logic gate(if statement) to decide whether or not dates are appended, in order
-            //  now          lastactive 
+            console.log(username + " " + duck6 + " ||| " + lastMonth2);
 
             //current - 30 days
             let thousand = current - past / 1000;
-
-            console.log(thousand);
-
-            //last active
-            console.log(unixDate);
 
             if (thousand >= unixDate) {
                 //creating a element for each data point
