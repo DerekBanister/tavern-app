@@ -95,8 +95,7 @@ async function getSinglePlayer() {
         }
 
     })
-
 }
 getSinglePlayer();
 
-// if were locked out, display an alert
+// store unix times in array, then display in order
