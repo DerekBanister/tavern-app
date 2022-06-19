@@ -22,3 +22,8 @@ ol li:before {
     padding: 3px 8px;
     border-radius: 3px;
 }
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
