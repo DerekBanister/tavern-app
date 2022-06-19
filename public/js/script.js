@@ -1,19 +1,4 @@
 let listEl = document.querySelector(".idea");
-let today = new Date().toISOString().slice(0, 10);
-
-function subtractMonths(numOfMonths, date = new Date()) {
-    date.setMonth(date.getMonth() - numOfMonths);
-
-    return date;
-}
-
-const result = subtractMonths(1);
-const newnew = result.toISOString().slice(0, 10);
-// console.log(newnew);
-
-
-
-
 
 async function getMemberList() {
     //the polar badlands prefix to the temple api url is a cors bypass.
@@ -56,8 +41,6 @@ async function getSinglePlayer() {
                     "Accept": "application/json"
                 },
             })
-            // setinterval on this loop
-
 
 
             //this var is a single cc members data
@@ -69,31 +52,39 @@ async function getSinglePlayer() {
             //individual username
             let username = individual.Username;
 
-
-            //all this is to make date format clean
             //last time the user was checked at templeosrs
             let lastChecked = individual["Last changed"];
+            //last active unix time
+            let unixDate = Math.floor(new Date(lastChecked).getTime())
+            //30 days previous from active time
+            let past = unixDate - 2592000 * 1000;
+
+            // console.log(unixDate);
+            // console.log(past);
+            let current = Date.now();
+
             //cutting off useless timestamp on lastChecked
             let formatted = lastChecked.split(" ")[0];
             //Split date on the -  (2022-05-27 will be 2022 at index 0, 05 at index 2, etc..)
             let newStr = formatted.split("-");
-            let newDuck = newnew.split("-");
             //reverse date format
-            let duck4 = newDuck[1] + '-' + newDuck[2] + '-' + newDuck[0];
-
             let lastActive = newStr[1] + '-' + newStr[2] + '-' + newStr[0];
+            // console.log(lastActive);
 
-
-            let duck5 = duck4.split("-");
-            let duck6 = duck5[0] // (5)
-
-            let lastMonth = lastActive.split("-");
-            let lastMonth2 = lastMonth[0]; // (4)
-
-            console.log(username + " " + duck6 + " ||| " + lastMonth2);
+            // console.log(username + " " + duck6 + " ||| " + lastMonth2);
 
             // logic gate(if statement) to decide whether or not dates are appended, in order
-            if (parseInt(lastMonth2) <= parseInt(duck6)) {
+            //  now          lastactive 
+
+            //current - 30 days
+            let thousand = current - past / 1000;
+
+            console.log(thousand);
+
+            //last active
+            console.log(unixDate);
+
+            if (thousand >= unixDate) {
                 //creating a element for each data point
                 let li1 = document.createElement("li");
 
