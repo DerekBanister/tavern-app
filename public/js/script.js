@@ -2,30 +2,36 @@ let listEl = document.querySelector(".idea");
 
 async function getMemberList() {
     //the polar badlands prefix to the temple api url is a cors bypass.
-    const response = await fetch(`https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/group_info.php?id=1061`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-    });
-    //json the reponse
-    let ccMembers = await response.json()
-    //put full list of cc members in a var
-    let ccList = ccMembers.data.members
-    // console.log(ccMembers.data.members);
-    //return the list
-    return ccList;
+    try {
+        const response = await fetch(`https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/group_info.php?id=1061`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+        });
+        //json the reponse
+        let ccMembers = await response.json()
+        //put full list of cc members in a var
+        let ccList = ccMembers.data.members
+        // console.log(ccMembers.data.members);
+        //return the list
+        return ccList;
+    } catch (err) {
+        alert("You broke it dumbass, try again in an hour");
+    }
 }
 
 // `https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/player_info.php?player=${singleMember}`
 async function getSinglePlayer() {
     //get cc member list from the function above
+
     let ccList = getMemberList();
 
     ccList.then(async function (list) {
         // list.length, for now using 5 so I dont hit 429's
         //looping through member array to get a specific member, then put their username in another api call to retreive player specific data
+
         for (let i = 0; i < list.length; i++) {
 
             //sleep for js
@@ -89,6 +95,8 @@ async function getSinglePlayer() {
         }
 
     })
-}
 
+}
 getSinglePlayer();
+
+// if were locked out, display an alert
