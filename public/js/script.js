@@ -76,8 +76,6 @@ async function getSinglePlayer() {
             //reverse date format
             let lastActive = newStr[1] + '-' + newStr[2] + '-' + newStr[0];
 
-            console.log(username + " " + duck6 + " ||| " + lastMonth2);
-
             //current - 30 days
             let thousand = current - past / 1000;
 
