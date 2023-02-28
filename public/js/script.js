@@ -1,4 +1,4 @@
-let listEl = document.querySelector(".idea");
+let listEl = document.querySelector(".list");
 
 async function getMemberList() {
     //the polar badlands prefix to the temple api url is a cors bypass.
@@ -94,6 +94,6 @@ async function getSinglePlayer() {
 
     })
 }
-// getSinglePlayer();
+getSinglePlayer();
 
 // store unix times in array, then display in order

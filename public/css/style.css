@@ -7,29 +7,20 @@ a {
     color: white;
 }
 
-.idea {
+span {
+    font-style: italic;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.list {
+    color: white;
     text-align: center;
     font-size: 30px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     border: 1px solid rgb(8, 0, 0);
-}
-
-ol li {
-    list-style-type: none;
-    counter-increment: item;
-}
-
-ol li:before {
-    content: counter(item);
-    margin-right: 5px;
-    font-size: 80%;
-    background-color: #f9dd94;
-    color: black;
-    font-weight: bold;
-    padding: 3px 8px;
-    border-radius: 3px;
 }
 
 h1 {
