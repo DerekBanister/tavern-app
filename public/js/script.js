@@ -3,7 +3,7 @@ let listEl = document.querySelector(".idea");
 async function getMemberList() {
     //the polar badlands prefix to the temple api url is a cors bypass.
     try {
-        const response = await fetch(`https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/group_info.php?id=1061`, {
+        const response = await fetch(`https://vivacious-buckle-dog.cyclic.app/https://templeosrs.com/api/group_info.php?id=1061`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +40,7 @@ async function getSinglePlayer() {
             let singleMember = list[i];
 
             //api call for single members from member list
-            const response = await fetch(`https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/player_info.php?player=${singleMember}`, {
+            const response = await fetch(`https://vivacious-buckle-dog.cyclic.app/https://templeosrs.com/api/player_info.php?player=${singleMember}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
