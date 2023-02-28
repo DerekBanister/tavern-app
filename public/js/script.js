@@ -94,6 +94,6 @@ async function getSinglePlayer() {
 
     })
 }
-getSinglePlayer();
+// getSinglePlayer();
 
 // store unix times in array, then display in order
