@@ -1,7 +1,24 @@
 let listEl = document.querySelector(".list");
 
+function displayUsers(users) {
+    // Clear the existing list
+    listEl.innerHTML = "";
+
+    // Display the list of users in the sorted order
+    users.forEach((user) => {
+        //creating a element for each data point
+        let li1 = document.createElement("li");
+
+        // put username and last active date in the ol
+        li1.textContent = user.username + " | Last Active: " + user.lastActive;
+
+        //append both to page
+        listEl.appendChild(li1);
+    });
+}
+
 async function getMemberList() {
-    //the polar badlands prefix to the temple api url is a cors bypass.
+    // updated 2023 to using a cors-prefix hosted by myself on cyclic to prefix the temple api url
     try {
         const response = await fetch(`https://vivacious-buckle-dog.cyclic.app/https://templeosrs.com/api/group_info.php?id=1061`, {
             method: "GET",
@@ -28,8 +45,7 @@ async function getSinglePlayer() {
     let ccList = getMemberList();
 
     ccList.then(async function (list) {
-        // list.length, for now using 5 so I dont hit 429's
-        //looping through member array to get a specific member, then put their username in another api call to retreive player specific data
+        // list.length, for now using 5 so I dont hit 429'
 
         // Initialize an array to hold the user data
         let users = [];
@@ -38,6 +54,7 @@ async function getSinglePlayer() {
             let singleMember = list[i];
 
             //api call for single members from member list
+            // query for single clan member
             const response = await fetch(`https://vivacious-buckle-dog.cyclic.app/https://templeosrs.com/api/player_info.php?player=${singleMember}`, {
                 method: "GET",
                 headers: {
@@ -49,10 +66,12 @@ async function getSinglePlayer() {
             //this var is a single cc members data
             let ccMembers = await response.json();
 
-            //parsing out data
+            //parsing out a cc members data
             let individual = ccMembers.data;
             let username = individual.Username;
             let lastChecked = individual["Last changed"];
+
+            // Date conversion to make it easier to sort
             let unixDate = Math.floor(new Date(lastChecked).getTime())
             let past = unixDate - 2592000 * 1000;
             let current = Date.now();
@@ -61,6 +80,8 @@ async function getSinglePlayer() {
             let lastActive = newStr[1] + '-' + newStr[2] + '-' + newStr[0];
             let thousand = current - past / 1000;
 
+
+            // logic gate that decides if a user last active date meets the 30 day threshold
             if (thousand >= unixDate) {
                 // Add user data to the users array
                 users.push({ username, lastActive });
@@ -71,28 +92,12 @@ async function getSinglePlayer() {
                 // Display the sorted list of users
                 displayUsers(users);
 
-                // Sleep for 500ms before loading the next user
+                // Sleep for 500ms before loading the next user so we don't hit the API rate limit
+                // temple's api is super finicky and this is the only way to not get 429'd
                 await new Promise(r => setTimeout(r, 500));
             }
         }
     })
-}
-
-function displayUsers(users) {
-    // Clear the existing list
-    listEl.innerHTML = "";
-
-    // Display the list of users in the sorted order
-    users.forEach((user) => {
-        //creating a element for each data point
-        let li1 = document.createElement("li");
-
-        // put username and last active date in the ol
-        li1.textContent = user.username + " | Last Active: " + user.lastActive;
-
-        //append both to page
-        listEl.appendChild(li1);
-    });
 }
 
 getSinglePlayer();

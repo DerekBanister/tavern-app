@@ -1,16 +1,16 @@
 body {
-    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
-    color: white;
+    background: linear-gradient(112.1deg, rgb(0, 0, 0) 11.4%, rgb(117, 100, 0) 70.2%);
+    color: #fff;
 }
 
 a {
-    color: white;
+    color: #fff;
 }
 
 span {
     font-style: italic;
     padding: 10px;
-    font-size: 20px;
+    font-size: 26px;
 }
 
 .list {
@@ -20,14 +20,38 @@ span {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    border: 1px solid rgb(8, 0, 0);
+    border: 1px solid rgb(255, 215, 0);
+    max-width: 600px;
+    padding: 20px;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(255, 215, 0);
+}
+
+.list li:last-of-type {
+    border-bottom: none;
+}
+
+.list li span {
+    font-style: normal;
+    font-size: 16px;
+    color: #999;
+    margin-left: 10px;
 }
 
 h1 {
     margin: 50px;
     text-align: center;
+    color: #fff;
 }
 
 h2 {
     text-align: center;
+    color: #fff;
 }
