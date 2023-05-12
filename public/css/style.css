@@ -13,6 +13,25 @@ span {
     font-size: 26px;
 }
 
+#button {
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(255, 215, 0);
+    border: none;
+    border-radius: 10px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#button:hover {
+    background-color: #fff;
+    color: rgb(255, 215, 0);
+}
+
 .list {
     color: white;
     text-align: center;

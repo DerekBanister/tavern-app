@@ -1,4 +1,5 @@
 let listEl = document.querySelector(".list");
+const button = document.querySelector("#button");
 
 function displayUsers(users) {
     // Clear the existing list
@@ -105,5 +106,7 @@ async function getSinglePlayer() {
     }
 }
 
-getSinglePlayer();
+button.addEventListener("click", () => {
+    getSinglePlayer();
+});
 // store unix times in array, then display in order
