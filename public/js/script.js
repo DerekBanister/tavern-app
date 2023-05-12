@@ -1,5 +1,6 @@
 let listEl = document.querySelector(".list");
 const button = document.querySelector("#button");
+const loading = document.querySelector(".loading");
 
 function displayUsers(users) {
     // Clear the existing list
@@ -108,5 +109,6 @@ async function getSinglePlayer() {
 
 button.addEventListener("click", () => {
     getSinglePlayer();
+    loading.innerHTML = 'Inactive members are now loading below...';
 });
 // store unix times in array, then display in order
