@@ -55,6 +55,7 @@ async function getSinglePlayer() {
 
             //api call for single members from member list
             // query for single clan member
+
             const response = await fetch(`https://vivacious-buckle-dog.cyclic.app/https://templeosrs.com/api/player_info.php?player=${singleMember}`, {
                 method: "GET",
                 headers: {
@@ -94,7 +95,7 @@ async function getSinglePlayer() {
 
                 // Sleep for 500ms before loading the next user so we don't hit the API rate limit
                 // temple's api is super finicky and this is the only way to not get 429'd
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 1000));
             }
         }
     })
