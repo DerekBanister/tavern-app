@@ -41,12 +41,12 @@ async function getMemberList() {
     }
 }
 
+const ccList = getMemberList();
+
 // `https://polar-badlands-45238.herokuapp.com/https://templeosrs.com/api/player_info.php?player=${singleMember}`
 async function getSinglePlayer() {
     //get cc member list from the function above
     try {
-        let ccList = getMemberList();
-
         ccList.then(async function (list) {
             // list.length, for now using 5 so I dont hit 429'
 
@@ -58,7 +58,6 @@ async function getSinglePlayer() {
 
                 //api call for single members from member list
                 // query for single clan member
-
                 const response = await fetch(`https://vivacious-buckle-dog.cyclic.app/https://templeosrs.com/api/player_info.php?player=${singleMember}`, {
                     method: "GET",
                     headers: {
